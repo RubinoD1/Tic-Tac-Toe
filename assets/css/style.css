@@ -10,6 +10,10 @@ table {
     padding: 70px 0;
 }
 
+td {
+    padding: 25px;
+}
+
 /* table borders */
 .bottom  {
     border-bottom: solid black 2px;
