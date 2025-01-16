@@ -62,26 +62,28 @@ function gameCheck(value){
 
 let array = [
   //horizontal row 1
-  {row: [square1.innerHTML,square2.innerHTML,square3.innerHTML], winnable: true},
+  {row: [square1.innerHTML + square2.innerHTML + square3.innerHTML], winnable: true},
   //horizontal row 2 
   {row: [square4.innerHTML + square5.innerHTML + square6.innerHTML], winnable: true},
   //horizontal row 3
-  {row: [7,8,9], winnable: true},
+  {row: [square7.innerHTML + square8.innerHTML + square9.innerHTML], winnable: true},
   //vertical row 1
-  {row: [1,4,7], winnable: true},
+  {row: [square1.innerHTML + square4.innerHTML + square7.innerHTML], winnable: true},
   //vertical row 2
-  {row: [2,5,8], winnable: true},
+  {row: [square2.innerHTML + square5.innerHTML + square8.innerHTML], winnable: true},
   //vertical row 3
-  {row: [3,6,9], winnable: true},
+  {row: [square3.innerHTML + square6.innerHTML + square9.innerHTML], winnable: true},
   //diagonal row 1 
-  {row: [7,5,3], winnable: true},
+  {row: [square7.innerHTML + square5.innerHTML + square3.innerHTML], winnable: true},
   //diagonal row 2 
-  {row: [1,5,9], winnable: true},
+  {row: [square1.innerHTML + square5.innerHTML + square9.innerHTML], winnable: true},
  ];
  
  // console.log(array[0].row);
  // console.log(array[1].winnable);
- console.log(array[0].row, array[1].row);
+ //console.log(array[0].row, array[1].row);
+ console.log(array[1].row.includes("xxx"));
+ //console.log(array[1].row.includes("xo"));
 
-//  gameCheck(array[0].row);
+ //  gameCheck(array[0].row);
 //  gameCheck(array[1].row);
