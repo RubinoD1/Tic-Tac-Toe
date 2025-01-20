@@ -46,17 +46,43 @@ function changeTurn(){
   return; //redundant once gameStatus function in place
 }
 
-// Check if game won || is draw ELSE continue
-function gameCheck(value){
-  // set value to var  square1.innerHTML
-  let check = value;
-  if(check.includes("x") == true){//chain an & .includes("o") also true for invalid check 
-    console.log("true");
-    
-  }else {
-    console.log("false");
-    
-  }
+//iterate through relevant array values to check if either game over, won, or continue
+function gameCheck(){
+
+ let check = array[1].row;
+ //console.log(check, "this is check");
+ //console.log(check.includes('xxx'));
+ 
+ switch (true) {
+  case check.includes('xxx'):
+   console.log("Includes 3 x -- GAME WON")
+   break;
+ case check.includes("ooo"):
+   console.log('Includes 3 o -- GAME WON');
+   break;
+ case check.includes("xxo"):
+ case check.includes("xox"):
+ case check.includes("oxx"):
+ case check.includes("oox"):
+ case check.includes("oxo"):
+ case check.includes("xoo"):
+   console.log('INCLUDES TWO MATCHES & a opposite -- SET TO UNWINNABLE');
+   break;
+ case check.includes("xx"):
+ case check.includes("oo"):
+   console.log('INCLUDES TWO MATCHES -- GAME CONTINUES');
+   break;
+ case check.includes("xo"):
+ case check.includes("ox"):
+   console.log('INCLUDES one MATCH & opposite -- SET TO UNWINNABLE');
+   break;
+ case check.includes("x"):
+ case check.includes("o"):
+   console.log('INCLUDES ONE MATCH -- GAME CONTINUES');
+   break;
+ default:
+   console.log(`Default case -- NO MATCHES`);
+}
 }
 
 
@@ -82,8 +108,8 @@ let array = [
  // console.log(array[0].row);
  // console.log(array[1].winnable);
  //console.log(array[0].row, array[1].row);
- console.log(array[1].row.includes("xxx"));
+ //console.log(array[1].row.includes("xxx"));
  //console.log(array[1].row.includes("xo"));
 
  //  gameCheck(array[0].row);
-//  gameCheck(array[1].row);
+gameCheck();
