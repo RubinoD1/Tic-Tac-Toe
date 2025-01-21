@@ -48,43 +48,65 @@ function changeTurn(){
 
 //iterate through relevant array values to check if either game over, won, or continue
 function gameCheck(){
+  let endLoop = false;//used to end for loop if win conditions met 
+  let winner = "";//used to pass winner value to gameWon function
+  for (let i = 0; i < array.length; i++) {
+    let check = array[i].row;
+    //console.log(i);
+    
+    if (endLoop == true){// if win condition met end for loop and run gameWon function
+      return gameWon(winner);
+    }
 
- let check = array[1].row;
- //console.log(check, "this is check");
- //console.log(check.includes('xxx'));
- 
- switch (true) {
-  case check.includes('xxx'):
-   console.log("Includes 3 x -- GAME WON")
-   break;
- case check.includes("ooo"):
-   console.log('Includes 3 o -- GAME WON');
-   break;
- case check.includes("xxo"):
- case check.includes("xox"):
- case check.includes("oxx"):
- case check.includes("oox"):
- case check.includes("oxo"):
- case check.includes("xoo"):
-   console.log('INCLUDES TWO MATCHES & a opposite -- SET TO UNWINNABLE');
-   break;
- case check.includes("xx"):
- case check.includes("oo"):
-   console.log('INCLUDES TWO MATCHES -- GAME CONTINUES');
-   break;
- case check.includes("xo"):
- case check.includes("ox"):
-   console.log('INCLUDES one MATCH & opposite -- SET TO UNWINNABLE');
-   break;
- case check.includes("x"):
- case check.includes("o"):
-   console.log('INCLUDES ONE MATCH -- GAME CONTINUES');
-   break;
- default:
-   console.log(`Default case -- NO MATCHES`);
-}
+    switch (true) {
+     case check.includes('xxx'):
+     case check.includes("ooo"):
+      console.log("Includes 3 x -- GAME WON");
+      endLoop = true;
+      winner = array[i].row;
+      break;
+    case check.includes("xxo"):
+    case check.includes("xox"):
+    case check.includes("oxx"):
+    case check.includes("oox"):
+    case check.includes("oxo"):
+    case check.includes("xoo"):
+      console.log('INCLUDES TWO MATCHES & a opposite -- SET TO UNWINNABLE');
+      break;
+    case check.includes("xx"):
+    case check.includes("oo"):
+      console.log('INCLUDES TWO MATCHES -- GAME CONTINUES');
+      break;
+    case check.includes("xo"):
+    case check.includes("ox"):
+      console.log('INCLUDES one MATCH & opposite -- SET TO UNWINNABLE');
+      break;
+    case check.includes("x"):
+    case check.includes("o"):
+      console.log('INCLUDES ONE MATCH -- GAME CONTINUES');
+      break;
+    case check.includes(""):
+      console.log("Nothing in place -- Game Continues");
+      break;
+    default:
+      console.log(`Default case -- NO MATCHES`);
+    }
+    console.log("END");
+    //run winnable function to check if game is still in a winnable state 
+
+  }
 }
 
+function gameWon(winner){
+  if (winner === "xxx"){
+    console.log("x has won the game!");
+    
+  }else {
+    console.log("o has won the game!");
+    
+  }
+  //console.log(winner + " has won the game");
+}
 
 let array = [
   //horizontal row 1
@@ -110,6 +132,23 @@ let array = [
  //console.log(array[0].row, array[1].row);
  //console.log(array[1].row.includes("xxx"));
  //console.log(array[1].row.includes("xo"));
+console.log(array.length);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  //  gameCheck(array[0].row);
 gameCheck();
