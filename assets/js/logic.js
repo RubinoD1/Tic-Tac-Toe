@@ -71,31 +71,46 @@ function gameCheck(){
     case check.includes("oox"):
     case check.includes("oxo"):
     case check.includes("xoo"):
-      console.log('INCLUDES TWO MATCHES & a opposite -- SET TO UNWINNABLE');
+    //added two case -- check they work 
+    case check.includes("xo"):
+    case check.includes("ox"):
+      console.log('INCLUDES TWO Types -- SET TO UNWINNABLE');
+      array[i].winnable = false;
+      console.log(array[i].winnable);
       break;
     case check.includes("xx"):
     case check.includes("oo"):
-      console.log('INCLUDES TWO MATCHES -- GAME CONTINUES');
-      break;
-    case check.includes("xo"):
-    case check.includes("ox"):
-      console.log('INCLUDES one MATCH & opposite -- SET TO UNWINNABLE');
-      break;
+    //ADDED TEST STILL WORKING 
     case check.includes("x"):
     case check.includes("o"):
-      console.log('INCLUDES ONE MATCH -- GAME CONTINUES');
-      break;
     case check.includes(""):
-      console.log("Nothing in place -- Game Continues");
+      console.log('INCLUDES ONE TYPE ONLY or NOTHING -- GAME CONTINUES');
       break;
     default:
       console.log(`Default case -- NO MATCHES`);
     }
-    console.log("END");
-    //run winnable function to check if game is still in a winnable state 
+  }
+  //run winnable check function to check if game still winnable THEN continue game IF TRUE
+  winnableCheck();
+}
+
+//winnable check funciton -- IF TRUE change turn function ELSE Draw game 
+function winnableCheck(){
+  //if no match result will be undefined
+  const result = array.find(({ winnable }) => winnable === true);
+
+  if(result === undefined){
+    console.log("GAME OVER");
+    //END GAME AS DRAW 
+
+  }else {
+    console.log("Winnable");
+    // RUN NEXT TURN FUNCTION || CHANGE HERE 
 
   }
+
 }
+
 
 function gameWon(winner){
   if (winner === "xxx"){
@@ -132,7 +147,7 @@ let array = [
  //console.log(array[0].row, array[1].row);
  //console.log(array[1].row.includes("xxx"));
  //console.log(array[1].row.includes("xo"));
-console.log(array.length);
+//console.log(array.length);
 
 
 
