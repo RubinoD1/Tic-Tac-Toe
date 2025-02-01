@@ -19,15 +19,22 @@ let turn = circle;
 document
   .querySelector('tbody')
   .addEventListener('click', ({ target }) => {
-    console.log(target.id, target.innerHTML);
-    if (target.innerHTML = " "){
-      // set class to icon value
-      //  target.classList.add(`${turn}`);
-      target.innerHTML = `${turn}`;
-      // change turn value 
-      changeTurn();
-    } else {
+    //console.log(target.id, target.innerHTML);
+
+    if (target.innerHTML !== ""){
       console.log("filled");//REPLACE WITH break instead once testing done
+    } else {      
+      target.innerHTML = `${turn}`;
+      
+      for (let i = 0; i < array.length; i++){
+        //iterate through array and update array.row values
+        const squareNumber = [[square1, square2, square3], [square4,square5,square6], [square7,square8,square9], [square1,square4,square7], [square2,square5,square8], [square3,square6,square9], [square7,square5,square3], [square1,square5,square9]];
+        array[i].row = [squareNumber[i][0].innerHTML + squareNumber[i][1].innerHTML + squareNumber[i][2].innerHTML];
+        //console.log(array[i].row, " array row value");
+        
+      }
+
+      gameCheck();
     }
 
   });
@@ -36,14 +43,10 @@ document
 function changeTurn(){
   if(turn === "o"){
     turn = x;
-    // check if win || draw condition met
-
   } else {
     turn = circle;
-    // check if win || draw condition met
-
   }
-  return; //redundant once gameStatus function in place
+  return turn; //redundant once gameStatus function in place
 }
 
 //iterate through relevant array values to check if either game over, won, or continue
@@ -54,7 +57,7 @@ function gameCheck(){
     let check = array[i].row;
     //console.log(i);
     
-    if (endLoop == true){// if win condition met end for loop and run gameWon function
+    if (endLoop === true){// if win condition met end for loop and run gameWon function
       return gameWon(winner);
     }
 
@@ -106,7 +109,7 @@ function winnableCheck(){
   }else {
     console.log("Winnable");
     // RUN NEXT TURN FUNCTION || CHANGE HERE 
-
+    changeTurn();
   }
 
 }
@@ -120,7 +123,6 @@ function gameWon(winner){
     console.log("o has won the game!");
     
   }
-  //console.log(winner + " has won the game");
 }
 
 let array = [
@@ -148,22 +150,9 @@ let array = [
  //console.log(array[1].row.includes("xxx"));
  //console.log(array[1].row.includes("xo"));
 //console.log(array.length);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  //  gameCheck(array[0].row);
-gameCheck();
+//gameCheck();
+
+//const testArray = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [7,5,3], [1,5,9]];
+//console.log(testArray[0] ,testArray[0][0]);
+//testArray[i][0]
