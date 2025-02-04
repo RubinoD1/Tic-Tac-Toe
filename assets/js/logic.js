@@ -14,13 +14,16 @@ const circle = "o";
 const x = "x";
 // turn tracker 
 let turn = circle;
+//game state won || draw = true
+let gameComplete = false;
 
 // on click change to either X || O if td element is " " THEN check if win or draw game
 document
   .querySelector('tbody')
   .addEventListener('click', ({ target }) => {
     //console.log(target.id, target.innerHTML);
-
+    
+    //Switch with else statement and add if gameComplete is false as an extra check to prevent play after game complete
     if (target.innerHTML !== ""){
       console.log("filled");//REPLACE WITH break instead once testing done
     } else {      
@@ -114,14 +117,16 @@ function winnableCheck(){
 
 }
 
-
+//NEED TO ADD DRAW GAME -- update to switch statement and change function name 
 function gameWon(winner){
   if (winner === "xxx"){
     console.log("x has won the game!");
+    //set gameComplete value to true 
     
   }else {
     console.log("o has won the game!");
-    
+     //set gameComplete value to true
+
   }
 }
 
@@ -144,15 +149,3 @@ let array = [
   {row: [square1.innerHTML + square5.innerHTML + square9.innerHTML], winnable: true},
  ];
  
- // console.log(array[0].row);
- // console.log(array[1].winnable);
- //console.log(array[0].row, array[1].row);
- //console.log(array[1].row.includes("xxx"));
- //console.log(array[1].row.includes("xo"));
-//console.log(array.length);
- //  gameCheck(array[0].row);
-//gameCheck();
-
-//const testArray = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [7,5,3], [1,5,9]];
-//console.log(testArray[0] ,testArray[0][0]);
-//testArray[i][0]
