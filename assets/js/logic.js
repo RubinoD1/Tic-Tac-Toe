@@ -1,4 +1,5 @@
 // DOM 
+// table cells 
 const square1 = document.getElementById("1");
 const square2 = document.getElementById("2");
 const square3 = document.getElementById("3");
@@ -8,6 +9,9 @@ const square6 = document.getElementById("6");
 const square7 = document.getElementById("7");
 const square8 = document.getElementById("8");
 const square9 = document.getElementById("9");
+// user message for game winner & draw game 
+const gameMessage = document.getElementById("game-message");
+
 
 // used to set class value for icon image
 const circle = "o";
@@ -21,13 +25,9 @@ let gameComplete = false;
 document
   .querySelector('tbody')
   .addEventListener('click', ({ target }) => {
-    //console.log(target.id, target.innerHTML);
-    
-    //Switch with else statement and add if gameComplete is false as an extra check to prevent play after game complete
-    if (target.innerHTML !== ""){
-      console.log("filled");//REPLACE WITH break instead once testing done
-    } else {      
-      target.innerHTML = `${turn}`;
+
+    if (target.innerHTML == "" && gameComplete === false){
+		target.innerHTML = `${turn}`;
       
       for (let i = 0; i < array.length; i++){
         //iterate through array and update array.row values
@@ -38,6 +38,10 @@ document
       }
 
       gameCheck();
+      
+    } else {   
+      //console.log("filled");
+      //If user clicks on a filled table cell -- DO NOTHING
     }
 
   });
@@ -108,7 +112,7 @@ function winnableCheck(){
   if(result === undefined){
     console.log("GAME OVER");
     //END GAME AS DRAW 
-
+    drawGame();
   }else {
     console.log("Winnable");
     // RUN NEXT TURN FUNCTION || CHANGE HERE 
@@ -117,16 +121,26 @@ function winnableCheck(){
 
 }
 
-//NEED TO ADD DRAW GAME -- update to switch statement and change function name 
+//DRAW GAME
+function drawGame (){
+  gameComplete = true; 
+  //console.log("Draw Game");
+  gameMessage.innerHTML = "Draw game";
+} 
+
+//Game has been won 
 function gameWon(winner){
-  if (winner === "xxx"){
-    console.log("x has won the game!");
-    //set gameComplete value to true 
+  //console.log(winner + " is winner value");
+  //set gameComplete value to true 
+  gameComplete = true; 
+  
+  if (winner == "xxx"){
+    //console.log("x has won the game!");
+    gameMessage.innerHTML = "X is the winner!";
     
   }else {
-    console.log("o has won the game!");
-     //set gameComplete value to true
-
+    //console.log("o has won the game!");
+    gameMessage.innerHTML = "O is the winner!"; 
   }
 }
 

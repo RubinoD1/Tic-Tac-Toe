@@ -1,5 +1,5 @@
 body {
-    background-color: #b0e6ed;
+    background-color: #e2e5e5;;
 }
 
 table {
@@ -19,6 +19,7 @@ td {
     min-height:150px;
     overflow:hidden; /*(Optional)This might be useful for some overflow contents*/
 }
+
 /* table borders */
 .bottom  {
     border-bottom: solid black 2px;
@@ -26,4 +27,25 @@ td {
 
 .right {
     border-right: solid black 2px;
+}
+/* restart button */
+#restart-btn {
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #ffe4c4;
+    /* horizontalally center btn */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Game won || draw game message */
+#game-message {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
 }
