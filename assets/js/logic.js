@@ -33,7 +33,6 @@ document
         //iterate through array and update array.row values
         const squareNumber = [[square1, square2, square3], [square4,square5,square6], [square7,square8,square9], [square1,square4,square7], [square2,square5,square8], [square3,square6,square9], [square7,square5,square3], [square1,square5,square9]];
         array[i].row = [squareNumber[i][0].innerHTML + squareNumber[i][1].innerHTML + squareNumber[i][2].innerHTML];
-        //console.log(array[i].row, " array row value");
         
       }
 
@@ -60,18 +59,25 @@ function changeTurn(){
 function gameCheck(){
   let endLoop = false;//used to end for loop if win conditions met 
   let winner = "";//used to pass winner value to gameWon function
-  for (let i = 0; i < array.length; i++) {
-    let check = array[i].row;
-    //console.log(i);
-    
+  for (let i = 0; i <= array.length; i++) {
+    //let check = array[i].row;
+    let check = "";
+
     if (endLoop === true){// if win condition met end for loop and run gameWon function
       return gameWon(winner);
     }
 
+    if (i < array.length){
+      check = array[i].row;
+    }
+    else {
+      check = "";
+    }
+    
     switch (true) {
-     case check.includes('xxx'):
+     case check.includes("xxx"):
      case check.includes("ooo"):
-      console.log("Includes 3 x -- GAME WON");
+      console.log("Includes 3 matches-- GAME WON");
       endLoop = true;
       winner = array[i].row;
       break;

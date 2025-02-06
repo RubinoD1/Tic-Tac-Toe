@@ -7,6 +7,7 @@ table {
     font-size: 125px;
     margin: auto;
     width: 50%;
+    /* background-color: #f5f5dc; */
 }
 
 /* td values keep table cells at a fixed size regardless of empty or not */
@@ -46,6 +47,11 @@ td {
     text-align: center;
 }
 
-.hidden {
+/* .hidden {
     display: none;
+} */
+
+/* added to winning table cells */
+.winner { 
+    background-color: #f5f5dc;
 }
