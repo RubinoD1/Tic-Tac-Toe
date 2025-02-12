@@ -11,7 +11,7 @@ const square8 = document.getElementById("8");
 const square9 = document.getElementById("9");
 // user message for game winner & draw game 
 const gameMessage = document.getElementById("game-message");
-
+const squareNumber = [[square1, square2, square3], [square4,square5,square6], [square7,square8,square9], [square1,square4,square7], [square2,square5,square8], [square3,square6,square9], [square7,square5,square3], [square1,square5,square9]];
 
 // used to set class value for icon image
 const circle = "o";
@@ -20,6 +20,8 @@ const x = "x";
 let turn = circle;
 //game state won || draw = true
 let gameComplete = false;
+//used on winning squares to modify classes for style changes
+let winningSquares; 
 
 // on click change to either X || O if td element is " " THEN check if win or draw game
 document
@@ -30,20 +32,19 @@ document
 		target.innerHTML = `${turn}`;
       
       for (let i = 0; i < array.length; i++){
-        //iterate through array and update array.row values
-        const squareNumber = [[square1, square2, square3], [square4,square5,square6], [square7,square8,square9], [square1,square4,square7], [square2,square5,square8], [square3,square6,square9], [square7,square5,square3], [square1,square5,square9]];
+        //update array.row values
         array[i].row = [squareNumber[i][0].innerHTML + squareNumber[i][1].innerHTML + squareNumber[i][2].innerHTML];
-        
       }
 
       gameCheck();
       
     } else {   
-      //console.log("filled");
       //If user clicks on a filled table cell -- DO NOTHING
     }
+});
 
-  });
+//reset button event listener 
+
 
 // change turn value THEN call gameStatus function
 function changeTurn(){
@@ -80,6 +81,8 @@ function gameCheck(){
       console.log("Includes 3 matches-- GAME WON");
       endLoop = true;
       winner = array[i].row;
+      //testing winningSquares 
+      winningSquares = i; 
       break;
     case check.includes("xxo"):
     case check.includes("xox"):
@@ -136,9 +139,13 @@ function drawGame (){
 
 //Game has been won 
 function gameWon(winner){
-  //console.log(winner + " is winner value");
   //set gameComplete value to true 
   gameComplete = true; 
+  //Set .winner class to winning squares 
+  console.log(squareNumber[winningSquares][0]);
+  for (i = 0; i < 3; i++){
+    squareNumber[winningSquares][i].classList.add("winner"); 
+  }
   
   if (winner == "xxx"){
     //console.log("x has won the game!");
