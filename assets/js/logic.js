@@ -11,6 +11,8 @@ const square8 = document.getElementById("8");
 const square9 = document.getElementById("9");
 // user message for game winner & draw game 
 const gameMessage = document.getElementById("game-message");
+//reset button 
+const resetBtn = document.getElementById("restart-btn"); 
 const squareNumber = [[square1, square2, square3], [square4,square5,square6], [square7,square8,square9], [square1,square4,square7], [square2,square5,square8], [square3,square6,square9], [square7,square5,square3], [square1,square5,square9]];
 
 // used to set class value for icon image
@@ -44,7 +46,32 @@ document
 });
 
 //reset button event listener 
+resetBtn.addEventListener("click" , () => {
+  //reset var values 
+  gameComplete = false;
+  turn = circle;
 
+  //remove winner class from squares if found 
+  if (winningSquares !== undefined){
+    for (i = 0; i < 3; i++){
+      squareNumber[winningSquares][i].classList.remove("winner"); 
+    }
+  } else {
+    //DO Nothing -- no winner class to remove 
+  }
+  
+  winningSquares = undefined;
+  
+  //reset html squares to empty 
+  const fields = document.querySelectorAll("#table td");
+
+  fields.forEach(cell => {
+   cell.innerHTML = "";
+  });
+
+  //reset game message 
+  gameMessage.innerHTML = "Enjoy the game!";
+}) 
 
 // change turn value THEN call gameStatus function
 function changeTurn(){
@@ -142,7 +169,7 @@ function gameWon(winner){
   //set gameComplete value to true 
   gameComplete = true; 
   //Set .winner class to winning squares 
-  console.log(squareNumber[winningSquares][0]);
+  //console.log(squareNumber[winningSquares][0]);
   for (i = 0; i < 3; i++){
     squareNumber[winningSquares][i].classList.add("winner"); 
   }
