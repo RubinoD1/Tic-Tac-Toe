@@ -31,15 +31,8 @@ document
   .addEventListener('click', ({ target }) => {
 
     if (target.innerHTML == "" && gameComplete === false){
-		target.innerHTML = `${turn}`;
-      
-      for (let i = 0; i < array.length; i++){
-        //update array.row values
-        array[i].row = [squareNumber[i][0].innerHTML + squareNumber[i][1].innerHTML + squareNumber[i][2].innerHTML];
-      }
-
+		  target.innerHTML = `${turn}`;  
       gameCheck();
-      
     } else {   
       //If user clicks on a filled table cell -- DO NOTHING
     }
@@ -77,16 +70,30 @@ resetBtn.addEventListener("click" , () => {
 function changeTurn(){
   if(turn === "o"){
     turn = x;
+    //call cpuTurn function 
+
   } else {
     turn = circle;
   }
   return turn; //redundant once gameStatus function in place
 }
 
+//cpuTurn function -- logic for how cpu decides its turn 
+function cpuTurn(){
+  
+}
+
 //iterate through relevant array values to check if either game over, won, or continue
 function gameCheck(){
   let endLoop = false;//used to end for loop if win conditions met 
   let winner = "";//used to pass winner value to gameWon function
+  
+  //update array.row values
+  for (let i = 0; i < array.length; i++){
+    array[i].row = [squareNumber[i][0].innerHTML + squareNumber[i][1].innerHTML + squareNumber[i][2].innerHTML];
+  }
+  
+  
   for (let i = 0; i <= array.length; i++) {
     //let check = array[i].row;
     let check = "";
