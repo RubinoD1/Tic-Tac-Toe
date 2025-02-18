@@ -71,16 +71,64 @@ function changeTurn(){
   if(turn === "o"){
     turn = x;
     //call cpuTurn function 
-
+    cpuTurn();
   } else {
     turn = circle;
   }
-  return turn; //redundant once gameStatus function in place
+  //return turn; //redundant once gameStatus function in place
 }
 
-//cpuTurn function -- logic for how cpu decides its turn 
+//logic for how cpu decides its turn 
 function cpuTurn(){
+//let conditionMet = false; //NEEDED if calling new function doesn't break out of function -- Also used for extra conditional check on if/else statements 
+
+//xx is highest -- means cpu can WIN this turn 
+for (let i = 0; i < array.length; i++){
+  if(array[i].row == "xx"){
+    console.log("cpu xx");
+    //conditionMet = true;//USED TO BREAK OUT OF FOR STATEMENT 
+    cpuMoveSet(i); 
+    return;
+  } else {
+    //DO NOTHING
+    console.log("DO NOTHING xx check");
+    
+  }
+}
+
+//oo -- need to break line to not lose game 
+
+
+
+
+//x -- Add on to line no other priorities 
+
+// NO X's and middle avaliable -- Take middle square 
+
+// No X's and middle taken -- RANDOM SELECT SQUARE 
+
+ console.log("Outside of for statement");
+}
+
+function cpuMoveSet(selected){
+
+  //iterate through squareNumber[selected] and find the space that is "" THEN set that value to x 
+  for(i=0; i < squareNumber[selected].length; i++){
+   
+    
+    if(squareNumber[selected][i].innerHTML === ""){
+      //console.log("inner html");
+      squareNumber[selected][i].innerHTML = "x";
+      gameCheck();
+      return;
+
+    } else {
+      //DO Nothing 
+    }
+  }  
   
+  //console.log("beyond cpu move");
+   
 }
 
 //iterate through relevant array values to check if either game over, won, or continue
@@ -112,7 +160,7 @@ function gameCheck(){
     switch (true) {
      case check.includes("xxx"):
      case check.includes("ooo"):
-      console.log("Includes 3 matches-- GAME WON");
+      //console.log("Includes 3 matches-- GAME WON");
       endLoop = true;
       winner = array[i].row;
       //testing winningSquares 
@@ -127,9 +175,9 @@ function gameCheck(){
     //added two case -- check they work 
     case check.includes("xo"):
     case check.includes("ox"):
-      console.log('INCLUDES TWO Types -- SET TO UNWINNABLE');
+      //console.log('INCLUDES TWO Types -- SET TO UNWINNABLE');
       array[i].winnable = false;
-      console.log(array[i].winnable);
+      //console.log(array[i].winnable);
       break;
     case check.includes("xx"):
     case check.includes("oo"):
@@ -137,10 +185,11 @@ function gameCheck(){
     case check.includes("x"):
     case check.includes("o"):
     case check.includes(""):
-      console.log('INCLUDES ONE TYPE ONLY or NOTHING -- GAME CONTINUES');
+      //console.log('INCLUDES ONE TYPE ONLY or NOTHING -- GAME CONTINUES');
       break;
     default:
       console.log(`Default case -- NO MATCHES`);
+      break;
     }
   }
   //run winnable check function to check if game still winnable THEN continue game IF TRUE
