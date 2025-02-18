@@ -86,7 +86,6 @@ function cpuTurn(){
 for (let i = 0; i < array.length; i++){
   if(array[i].row == "xx"){
     console.log("cpu xx");
-    //conditionMet = true;//USED TO BREAK OUT OF FOR STATEMENT 
     cpuMoveSet(i); 
     return;
   } else {
@@ -97,26 +96,44 @@ for (let i = 0; i < array.length; i++){
 }
 
 //oo -- need to break line to not lose game 
-
-
-
+for (let i = 0; i < array.length; i++){
+  if(array[i].row == "oo"){
+    console.log("cpu oo");
+    cpuMoveSet(i); 
+    return;
+  } else {
+    //DO NOTHING
+    console.log("DO NOTHING oo check");
+    
+  }
+}
 
 //x -- Add on to line no other priorities 
+for (let i = 0; i < array.length; i++){
+  if(array[i].row == "x"){
+    console.log("cpu x");
+    cpuMoveSet(i); 
+    return;
+  } else {
+    //DO NOTHING
+    console.log("DO NOTHING x check");
+    
+  }
+}
 
-// NO X's and middle avaliable -- Take middle square 
+// No X's RANDOM SELECT SQUARE 
+    //randomly select row to be used 
+//var to select number between 0 - 7 for row to use 
 
-// No X's and middle taken -- RANDOM SELECT SQUARE 
+//call cpuMoveSet with var 
 
  console.log("Outside of for statement");
 }
 
 function cpuMoveSet(selected){
-
-  //iterate through squareNumber[selected] and find the space that is "" THEN set that value to x 
+//iterate through squareNumber[selected] and find the space that is "" THEN set that value to x 
   for(i=0; i < squareNumber[selected].length; i++){
-   
-    
-    if(squareNumber[selected][i].innerHTML === ""){
+   if(squareNumber[selected][i].innerHTML === ""){
       //console.log("inner html");
       squareNumber[selected][i].innerHTML = "x";
       gameCheck();
@@ -125,10 +142,7 @@ function cpuMoveSet(selected){
     } else {
       //DO Nothing 
     }
-  }  
-  
-  //console.log("beyond cpu move");
-   
+  }   
 }
 
 //iterate through relevant array values to check if either game over, won, or continue
