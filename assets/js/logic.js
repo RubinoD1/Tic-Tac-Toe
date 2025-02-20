@@ -13,9 +13,10 @@ const square9 = document.getElementById("9");
 const gameMessage = document.getElementById("game-message");
 //reset button 
 const resetBtn = document.getElementById("restart-btn"); 
+//used to update the array.row values
 const squareNumber = [[square1, square2, square3], [square4,square5,square6], [square7,square8,square9], [square1,square4,square7], [square2,square5,square8], [square3,square6,square9], [square7,square5,square3], [square1,square5,square9]];
 
-// used to set class value for icon image
+// used in setting player turns
 const circle = "o";
 const x = "x";
 // turn tracker 
@@ -38,34 +39,6 @@ document
     }
 });
 
-//reset button event listener 
-// resetBtn.addEventListener("click" , () => {
-//   //reset var values 
-//   gameComplete = false;
-//   turn = circle;
-
-//   //remove winner class from squares if found 
-//   if (winningSquares !== undefined){
-//     for (i = 0; i < 3; i++){
-//       squareNumber[winningSquares][i].classList.remove("winner"); 
-//     }
-//   } else {
-//     //DO Nothing -- no winner class to remove 
-//   }
-  
-//   winningSquares = undefined;
-  
-//   //reset html squares to empty 
-//   const fields = document.querySelectorAll("#table td");
-
-//   fields.forEach(cell => {
-//    cell.innerHTML = "";
-//   });
-
-//   //reset game message 
-//   gameMessage.innerHTML = "Enjoy the game!";
-// }) 
-
 //reloads webpage 
 resetBtn.addEventListener("click" , () => {
   window.location.reload();// reload the current page
@@ -75,70 +48,58 @@ resetBtn.addEventListener("click" , () => {
 function changeTurn(){
   if(turn === "o"){
     turn = x;
-    //call cpuTurn function 
     cpuTurn();
   } else {
     turn = circle;
   }
-  //return turn; //redundant once gameStatus function in place
 }
 
 //logic for how cpu decides its turn 
 function cpuTurn(){
-//let conditionMet = false; //NEEDED if calling new function doesn't break out of function -- Also used for extra conditional check on if/else statements 
 
-//xx is highest -- means cpu can WIN this turn 
+  //xx is highest -- means cpu can WIN this turn 
 for (let i = 0; i < array.length; i++){
   if(array[i].row == "xx"){
-    console.log("cpu xx");
     cpuMoveSet(i); 
     return;
   } else {
     //DO NOTHING
-    console.log("DO NOTHING xx check");
-    
   }
 }
 
 //oo -- need to break line to not lose game 
 for (let i = 0; i < array.length; i++){
   if(array[i].row == "oo"){
-    console.log("cpu oo");
     cpuMoveSet(i); 
     return;
   } else {
     //DO NOTHING
-    console.log("DO NOTHING oo check");
-    
   }
 }
 
 //x -- Add on to line no other priorities 
 for (let i = 0; i < array.length; i++){
   if(array[i].row == "x"){
-    console.log("cpu x");
     cpuMoveSet(i); 
     return;
   } else {
     //DO NOTHING
-    console.log("DO NOTHING x check");
-    
   }
 }
 
 // No X's RANDOM SELECT  
 //select number between 0 - 7 to determine which array.row index value to use 
 const minCeiled = Math.ceil(0);//smallest integer greater than or equal to a give number. 
-const maxFloored = Math.floor(7);//returns the largest interger less than or equal to a given number. 
+const maxFloored = Math.floor(7);//largest interger less than or equal to a given number. 
 cpuMoveSet(Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled));
 return;
 }
 
+//set innerHTML for cpu turn 
 function cpuMoveSet(selected){
 //iterate through squareNumber[selected] and find the space that is "" THEN set that value to x 
   for(i=0; i < squareNumber[selected].length; i++){
    if(squareNumber[selected][i].innerHTML === ""){
-      //console.log("inner html");
       squareNumber[selected][i].innerHTML = "x";
       gameCheck();
       return;
@@ -177,7 +138,6 @@ function gameCheck(){
     switch (true) {
      case check.includes("xxx"):
      case check.includes("ooo"):
-      //console.log("Includes 3 matches-- GAME WON");
       endLoop = true;
       winner = array[i].row;
       winningSquares = i; 
@@ -190,23 +150,19 @@ function gameCheck(){
     case check.includes("xoo"):
     case check.includes("xo"):
     case check.includes("ox"):
-      //console.log('INCLUDES TWO Types -- SET TO UNWINNABLE');
       array[i].winnable = false;
-      //console.log(array[i].winnable);
       break;
     case check.includes("xx"):
     case check.includes("oo"):
     case check.includes("x"):
     case check.includes("o"):
     case check.includes(""):
-      //console.log('INCLUDES ONE TYPE ONLY or NOTHING -- GAME CONTINUES');
       break;
     default:
-      console.log(`Default case -- NO MATCHES`);
       break;
     }
   }
-  //run winnable check function to check if game still winnable THEN continue game IF TRUE
+  //call winnableCheck function to check if game still winnable 
   winnableCheck();
 }
 
@@ -215,41 +171,32 @@ function winnableCheck(){
   //if no match result will be undefined
   const result = array.find(({ winnable }) => winnable === true);
 
-  if(result === undefined){
-    console.log("GAME OVER");
-    //END GAME AS DRAW 
+  if(result === undefined){//if result is undefined the game is a draw
     drawGame();
-  }else {
-    console.log("Winnable");
-    // RUN NEXT TURN FUNCTION || CHANGE HERE 
+  }else { //else call the changeTurn function
     changeTurn();
   }
 
 }
 
-//DRAW GAME
+//Game is a draw
 function drawGame (){
   gameComplete = true; 
-  //console.log("Draw Game");
   gameMessage.innerHTML = "Draw game";
 } 
 
 //Game has been won 
 function gameWon(winner){
-  //set gameComplete value to true 
   gameComplete = true; 
   //Set .winner class to winning squares 
-  //console.log(squareNumber[winningSquares][0]);
   for (i = 0; i < 3; i++){
     squareNumber[winningSquares][i].classList.add("winner"); 
   }
   
   if (winner == "xxx"){
-    //console.log("x has won the game!");
     gameMessage.innerHTML = "X is the winner!";
     
   }else {
-    //console.log("o has won the game!");
     gameMessage.innerHTML = "O is the winner!"; 
   }
 }
