@@ -6,8 +6,7 @@ table {
     text-align: center;
     font-size: 125px;
     margin: auto;
-    width: 50%;
-    /* background-color: #f5f5dc; */
+    width: 70%;
 }
 
 /* td values keep table cells at a fixed size regardless of empty or not */
@@ -47,11 +46,52 @@ td {
     text-align: center;
 }
 
-/* .hidden {
-    display: none;
-} */
-
 /* added to winning table cells */
 .winner { 
     background-color: #f5f5dc;
 }
+
+/* MEDIA BREAK POINTS */
+/* Small devices (portrait tablets and large phones  */
+@media (max-width: 400px){
+    h1{
+        font-size: 1.5em;
+    }
+    
+    table {
+        font-size: 60px;
+    }   
+
+    td {
+        width:80px; 
+        height:75px;
+        max-width:80px;
+        min-width:80px; 
+        max-height:75px; 
+        min-height:75px;
+    }
+}
+
+/* Middle range between small and medium devices */
+@media (min-width: 401px) and (max-width: 507px) {
+    td {
+        width:120px; 
+        height:100px;
+        max-width:120px; 
+        min-width:120px; 
+        max-height:100px;
+        min-height:100px;
+    }
+} 
+
+/* Medium devices (landscape tablets, 477px and up) */
+@media (min-width: 508px) and (max-width: 938px) {
+    td {
+        width:160px; 
+        height:150px;
+        max-width:160px;
+        min-width:160px; 
+        max-height:150px; 
+        min-height:150px;
+    }
+} 
