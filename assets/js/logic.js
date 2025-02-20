@@ -39,31 +39,36 @@ document
 });
 
 //reset button event listener 
+// resetBtn.addEventListener("click" , () => {
+//   //reset var values 
+//   gameComplete = false;
+//   turn = circle;
+
+//   //remove winner class from squares if found 
+//   if (winningSquares !== undefined){
+//     for (i = 0; i < 3; i++){
+//       squareNumber[winningSquares][i].classList.remove("winner"); 
+//     }
+//   } else {
+//     //DO Nothing -- no winner class to remove 
+//   }
+  
+//   winningSquares = undefined;
+  
+//   //reset html squares to empty 
+//   const fields = document.querySelectorAll("#table td");
+
+//   fields.forEach(cell => {
+//    cell.innerHTML = "";
+//   });
+
+//   //reset game message 
+//   gameMessage.innerHTML = "Enjoy the game!";
+// }) 
+
+//reloads webpage 
 resetBtn.addEventListener("click" , () => {
-  //reset var values 
-  gameComplete = false;
-  turn = circle;
-
-  //remove winner class from squares if found 
-  if (winningSquares !== undefined){
-    for (i = 0; i < 3; i++){
-      squareNumber[winningSquares][i].classList.remove("winner"); 
-    }
-  } else {
-    //DO Nothing -- no winner class to remove 
-  }
-  
-  winningSquares = undefined;
-  
-  //reset html squares to empty 
-  const fields = document.querySelectorAll("#table td");
-
-  fields.forEach(cell => {
-   cell.innerHTML = "";
-  });
-
-  //reset game message 
-  gameMessage.innerHTML = "Enjoy the game!";
+  window.location.reload();// reload the current page
 }) 
 
 // change turn value THEN call gameStatus function
@@ -121,13 +126,12 @@ for (let i = 0; i < array.length; i++){
   }
 }
 
-// No X's RANDOM SELECT SQUARE 
-    //randomly select row to be used 
-//var to select number between 0 - 7 for row to use 
-
-//call cpuMoveSet with var 
-
- console.log("Outside of for statement");
+// No X's RANDOM SELECT  
+//select number between 0 - 7 to determine which array.row index value to use 
+const minCeiled = Math.ceil(0);//smallest integer greater than or equal to a give number. 
+const maxFloored = Math.floor(7);//returns the largest interger less than or equal to a given number. 
+cpuMoveSet(Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled));
+return;
 }
 
 function cpuMoveSet(selected){
@@ -157,7 +161,6 @@ function gameCheck(){
   
   
   for (let i = 0; i <= array.length; i++) {
-    //let check = array[i].row;
     let check = "";
 
     if (endLoop === true){// if win condition met end for loop and run gameWon function
@@ -177,7 +180,6 @@ function gameCheck(){
       //console.log("Includes 3 matches-- GAME WON");
       endLoop = true;
       winner = array[i].row;
-      //testing winningSquares 
       winningSquares = i; 
       break;
     case check.includes("xxo"):
@@ -186,7 +188,6 @@ function gameCheck(){
     case check.includes("oox"):
     case check.includes("oxo"):
     case check.includes("xoo"):
-    //added two case -- check they work 
     case check.includes("xo"):
     case check.includes("ox"):
       //console.log('INCLUDES TWO Types -- SET TO UNWINNABLE');
@@ -195,7 +196,6 @@ function gameCheck(){
       break;
     case check.includes("xx"):
     case check.includes("oo"):
-    //ADDED TEST STILL WORKING 
     case check.includes("x"):
     case check.includes("o"):
     case check.includes(""):
@@ -273,3 +273,6 @@ let array = [
   {row: [square1.innerHTML + square5.innerHTML + square9.innerHTML], winnable: true},
  ];
  
+
+
+
